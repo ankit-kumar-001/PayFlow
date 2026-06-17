@@ -7,7 +7,7 @@ from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
-# Initialize connection pool
+
 try:
     pg_pool = ThreadedConnectionPool(
         minconn=1,
@@ -22,7 +22,7 @@ except Exception as e:
     logger.error(f"Failed to initialize database connection pool: {e}")
     pg_pool = None
 
-# Initialize Redis client
+
 try:
     redis_client = redis.Redis(
         host=settings.REDIS_HOST,
