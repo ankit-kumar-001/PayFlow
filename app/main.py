@@ -1,0 +1,35 @@
+import logging
+from fastapi import FastAPI
+from app.db.pool import get_cursor, redis_client
+
+logger = logging.getLogger(__name__)
+
+app = FastAPI(title="Payment Gateway API")
+
+@app.get("/health")
+def health_check():
+    status = {
+        "status": "ok",
+        "db": "unhealthy",
+        "redis": "unhealthy"
+    }
+
+    # Check DB
+    try:
+        with get_cursor() as cursor:
+            cursor.execute("SELECT 1")
+            cursor.fetchone()
+            status["db"] = "healthy"
+    except Exception as e:
+        logger.error(f"DB health check failed: {e}")
+        status["status"] = "error"
+
+    # Check Redis
+    try:
+        if redis_client and redis_client.ping():
+            status["redis"] = "healthy"
+    except Exception as e:
+        logger.error(f"Redis health check failed: {e}")
+        status["status"] = "error"
+
+    return status
