@@ -28,6 +28,8 @@ def health_check():
     try:
         if redis_client and redis_client.ping():
             status["redis"] = "healthy"
+        else:
+            status["status"] = "error"
     except Exception as e:
         logger.error(f"Redis health check failed: {e}")
         status["status"] = "error"

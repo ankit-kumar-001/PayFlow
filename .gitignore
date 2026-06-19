@@ -8,3 +8,6 @@ env/
 .coverage
 htmlcov/
 .mypy_cache/
+architecture_and_flow.md
+details.txt
+agents.md
