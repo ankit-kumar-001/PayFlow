@@ -4,5 +4,6 @@ psycopg2-binary
 redis
 python-dotenv
 python-jose[cryptography]
-passlib[bcrypt]
+passlib
+bcrypt==3.2.2
 pydantic
