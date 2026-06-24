@@ -1,13 +1,14 @@
 import logging
 from fastapi import FastAPI
 from app.db.pool import get_cursor, redis_client
-from app.routers import auth
+from app.routers import auth, merchants
 
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Payment Gateway API")
 
 app.include_router(auth.router)
+app.include_router(merchants.router)
 
 @app.get("/health")
 def health_check():
