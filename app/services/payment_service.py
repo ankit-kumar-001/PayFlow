@@ -1,6 +1,7 @@
 from fastapi import HTTPException, status
 from app.repositories import payment_link_repo, transaction_repo
 from app.schemas.transaction import PaySimulationRequest
+from app.db import cache
 
 def simulate_payment(payment_link_id: str, request: PaySimulationRequest) -> dict:
     link = payment_link_repo.get_payment_link_by_id(payment_link_id)
@@ -36,5 +37,6 @@ def simulate_payment(payment_link_id: str, request: PaySimulationRequest) -> dic
     
     if transaction_status == "success":
         payment_link_repo.update_payment_link_status(payment_link_id, "paid")
+        cache.delete(f"payment_link:{payment_link_id}")
         
     return transaction
