@@ -6,6 +6,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 logger = logging.getLogger("app.middleware.logging")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
+#Here form BaseHTTPMiddleware we are inheriting and exending our functionality 
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         start_time = time.time()

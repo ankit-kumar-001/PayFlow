@@ -20,6 +20,7 @@ def create_merchant_endpoint(
         business_name=merchant_in.business_name
     )
 
+
 @router.get("/me", response_model=List[MerchantOut])
 def get_my_merchants(current_user: dict = Depends(get_current_user)):
     """

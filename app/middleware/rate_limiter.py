@@ -5,7 +5,7 @@ from app.db.pool import redis_client
 def rate_limit(limit: int, window_seconds: int):
     def dependency(request: Request):
         if not redis_client:
-            # Skip rate limiting if Redis is down
+            # Skip rate limiting if Redis is not working
             return
             
         # Use merchant's api_key if present, else client IP

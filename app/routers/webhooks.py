@@ -17,6 +17,7 @@ def create_webhook(
         request=webhook_in
     )
 
+
 @router.get("", response_model=List[WebhookOut])
 def list_webhooks(
     current_merchant: dict = Depends(get_current_merchant)
